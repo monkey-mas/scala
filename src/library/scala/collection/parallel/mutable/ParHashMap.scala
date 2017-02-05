@@ -15,6 +15,7 @@ import scala.collection.mutable.DefaultEntry
 import scala.collection.mutable.HashEntry
 import scala.collection.mutable.HashTable
 import scala.collection.mutable.UnrolledBuffer
+import scala.collection.mutable.UnrolledBuffer.Unrolled
 import scala.collection.parallel.Task
 
 /** A parallel hash map.
@@ -179,7 +180,7 @@ extends scala.collection.parallel.BucketCombiner[(K, V), ParHashMap[K, V], Defau
   def result: ParHashMap[K, V] = if (size >= (ParHashMapCombiner.numblocks * sizeMapBucketSize)) { // 1024
     // construct table
     val table = new AddingHashTable(size, tableLoadFactor, seedvalue)
-    val bucks = buckets.map(b => if (b ne null) b.headPtr else null)
+    val bucks = buckets.map[Unrolled[DefaultEntry[K, V]]](b => if (b ne null) b.headPtr else null)
     val insertcount = combinerTaskSupport.executeAndWaitResult(new FillBlocks(bucks, table, 0, bucks.length))
     table.setSize(insertcount)
     // TODO compare insertcount and size to see if compression is needed

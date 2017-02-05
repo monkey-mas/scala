@@ -17,4 +17,14 @@ class ArrayOpsTest {
     }
     assert( idx == 10 )
   }
+
+  @Test
+  def map() = {
+    val test = Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+    val plusOne = (i: Int) => i + 1
+
+    val actual = test.map(plusOne)
+    val expected = Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    assert( actual.deep == expected.deep )
+  }
 }

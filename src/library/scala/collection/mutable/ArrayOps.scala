@@ -207,6 +207,16 @@ object ArrayOps {
         i += 1
       }
     }
+
+    def map[U](f: T => U)(implicit ct: ClassTag[U]): Array[U] = {
+      val arr = new Array[U](length)
+      var i = 0
+      while (i < length) {
+        arr(i) = f(repr(i))
+        i += 1
+      }
+      arr
+    }
   }
 
   /** A class of `ArrayOps` for arrays containing `byte`s. */
@@ -226,6 +236,16 @@ final class ofByte(override val repr: Array[Byte]) extends AnyVal with ArrayOps[
         f(repr(i))
         i += 1
       }
+    }
+
+    def map[U : ClassTag](f: Byte => U): Array[U] = {
+      val arr = new Array[U](length)
+      var i = 0
+      while (i < length) {
+        arr(i) = f(repr(i))
+        i += 1
+      }
+      arr
     }
   }
 
@@ -247,6 +267,16 @@ final class ofShort(override val repr: Array[Short]) extends AnyVal with ArrayOp
         i += 1
       }
     }
+
+    def map[U : ClassTag](f: Short => U): Array[U] = {
+      val arr = new Array[U](length)
+      var i = 0
+      while (i < length) {
+        arr(i) = f(repr(i))
+        i += 1
+      }
+      arr
+    }
   }
 
   /** A class of `ArrayOps` for arrays containing `char`s. */
@@ -266,6 +296,16 @@ final class ofChar(override val repr: Array[Char]) extends AnyVal with ArrayOps[
         f(repr(i))
         i += 1
       }
+    }
+
+    def map[U : ClassTag](f: Char => U): Array[U] = {
+      val arr = new Array[U](length)
+      var i = 0
+      while (i < length) {
+        arr(i) = f(repr(i))
+        i += 1
+      }
+      arr
     }
   }
 
@@ -287,6 +327,16 @@ final class ofInt(override val repr: Array[Int]) extends AnyVal with ArrayOps[In
         i += 1
       }
     }
+
+    def map[U : ClassTag](f: Int => U): Array[U] = {
+      val arr = new Array[U](length)
+      var i = 0
+      while (i < length) {
+        arr(i) = f(repr(i))
+        i += 1
+      }
+      arr
+    }
   }
 
   /** A class of `ArrayOps` for arrays containing `long`s. */
@@ -306,6 +356,16 @@ final class ofLong(override val repr: Array[Long]) extends AnyVal with ArrayOps[
         f(repr(i))
         i += 1
       }
+    }
+
+    def map[U : ClassTag](f: Long => U): Array[U] = {
+      val arr = new Array[U](length)
+      var i = 0
+      while (i < length) {
+        arr(i) = f(repr(i))
+        i += 1
+      }
+      arr
     }
   }
 
@@ -327,6 +387,16 @@ final class ofFloat(override val repr: Array[Float]) extends AnyVal with ArrayOp
         i += 1
       }
     }
+
+    def map[U : ClassTag](f: Float => U): Array[U] = {
+      val arr = new Array[U](length)
+      var i = 0
+      while (i < length) {
+        arr(i) = f(repr(i))
+        i += 1
+      }
+      arr
+    }
   }
 
   /** A class of `ArrayOps` for arrays containing `double`s. */
@@ -346,6 +416,16 @@ final class ofDouble(override val repr: Array[Double]) extends AnyVal with Array
         f(repr(i))
         i += 1
       }
+    }
+
+    def map[U : ClassTag](f: Double => U): Array[U] = {
+      val arr = new Array[U](length)
+      var i = 0
+      while (i < length) {
+        arr(i) = f(repr(i))
+        i += 1
+      }
+      arr
     }
   }
 
@@ -367,6 +447,16 @@ final class ofBoolean(override val repr: Array[Boolean]) extends AnyVal with Arr
         i += 1
       }
     }
+
+    def map[U : ClassTag](f: Boolean => U): Array[U] = {
+      val arr = new Array[U](length)
+      var i = 0
+      while (i < length) {
+        arr(i) = f(repr(i))
+        i += 1
+      }
+      arr
+    }
   }
 
   /** A class of `ArrayOps` for arrays of `Unit` types. */
@@ -386,6 +476,16 @@ final class ofUnit(override val repr: Array[Unit]) extends AnyVal with ArrayOps[
         f(repr(i))
         i += 1
       }
+    }
+
+    def map[U : ClassTag](f: Unit => U): Array[U] = {
+      val arr = new Array[U](length)
+      var i = 0
+      while (i < length) {
+        arr(i) = f(repr(i))
+        i += 1
+      }
+      arr
     }
   }
 }

@@ -172,7 +172,7 @@ extends scala.collection.parallel.BucketCombiner[(K, V), ParHashMap[K, V], (K, V
   }
 
   def result = {
-    val bucks = buckets.filter(_ != null).map(_.headPtr)
+    val bucks = buckets.filter(_ != null).map[Unrolled[(K, V)]](_.headPtr)
     val root = new Array[HashMap[K, V]](bucks.length)
 
     combinerTaskSupport.executeAndWaitResult(new CreateTrie(bucks, root, 0, bucks.length))
@@ -194,7 +194,7 @@ extends scala.collection.parallel.BucketCombiner[(K, V), ParHashMap[K, V], (K, V
   }
 
   def groupByKey[Repr](cbf: () => Combiner[V, Repr]): ParHashMap[K, Repr] = {
-    val bucks = buckets.filter(_ != null).map(_.headPtr)
+    val bucks = buckets.filter(_ != null).map[Unrolled[(K, V)]](_.headPtr)
     val root = new Array[HashMap[K, AnyRef]](bucks.length)
 
     combinerTaskSupport.executeAndWaitResult(new CreateGroupedTrie(cbf, bucks, root, 0, bucks.length))
